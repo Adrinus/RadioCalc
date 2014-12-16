@@ -70,6 +70,23 @@ function round(num, idp)
 end
 
 
-
+function calcTrio()
+	local Freq = (tonumber(frequency)*1000000)
+	local Cap = (tonumber(capacitance)*0.000000000001)
+	local Induc = (tonumber(inductance)*0.000001)
+	if solve == "frequency" then
+		local f = (1/(2*math.pi*math.sqrt(Induc*Cap)))
+		local result = f*0.000001
+		frequency = round(result,4)
+	elseif solve == "capacitance" then
+		local c = (1/(4*(math.pi^2)*(Freq^2)*Induc))
+		local result = c*1000000000000
+		capacitance = round(result,0)
+	elseif solve == "inductance" then
+		local l = (1/(4*(math.pi^2)*(Freq^2)*Cap))
+		local result = l*1000000
+		inductance = round(result,0)
+	end
+end
 
 
