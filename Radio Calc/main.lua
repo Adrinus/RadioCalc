@@ -7,7 +7,7 @@ function love.load()
 	love.window.setIcon(radio)
 	love.graphics.setBackgroundColor(200,200,200)
 	screen = "main"
-	gauge = 1
+	gauge = 30
 	inductance = 250
 	radius = 1
 	mode = "none"
