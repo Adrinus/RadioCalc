@@ -43,11 +43,23 @@ gauges[40] = 0.00314
 function calcInduction()
 	if (tonumber(gauge) > 0 and tonumber(gauge) <= 40) and tonumber(radius) > 0 and tonumber(inductance) > 0 then
 		local R = (gauges[tonumber(gauge)]/2)+tonumber(radius)
-		local W = gauges[tonumber(gauge)]/2
-		local length = math.ceil((math.sqrt((tonumber(inductance)*(W^2))*((25*tonumber(inductance)*(W^2))+(9*(R^3))))+(5*tonumber(inductance)*(W^2)))/(R^2))
-		local turns = math.ceil(length/W)
-		return length,turns
+		local W = gauges[tonumber(gauge)]
+		local length = (math.sqrt(((tonumber(inductance))*(W^2))*((25*(tonumber(inductance))*(W^2))+(9*(R^3))))+(5*(tonumber(inductance))*(W^2)))/(R^2)
+		local turns = round((length/W),3)
+		local cir = 2*math.pi*R
+		local wireLength = cir*turns
+		return round(length,3),turns,wireLength
 	else
-		return 0,0
+		return 0,0,0
 	end
 end
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
+
+
+
+

@@ -13,6 +13,7 @@ function love.load()
 	mode = "none"
 	coilLength = 0
 	coilTurns = 0
+	wireLength = 0
 end
 
 function love.update(dt)
@@ -72,7 +73,7 @@ function love.mousepressed(x,y,key)
 		elseif (x>=150 and x<=250) and (y>=180 and y<=200) then
 			mode = "radius"
 		elseif (x>=150 and x<=250) and (y>=220 and y<=240) then
-			coilLength,coilTurns = calcInduction()
+			coilLength,coilTurns,wireLength = calcInduction()
 		else
 			mode = "none"
 		end
@@ -120,7 +121,8 @@ function love.draw()
 		love.graphics.setColor(0,0,0)
 		love.graphics.print("Calculate",200-(getWidth("Calculate")/2),225)
 		love.graphics.print("Coil Length: " ..coilLength .." inches",200-(getWidth("Coil Length: " ..coilLength .." inches")/2),250)
-		love.graphics.print("Number of Turns: " ..coilTurns .." turns",200-(getWidth("Number of Turns: " ..coilTurns .." turns")/2),270)
+		love.graphics.print("Number of Turns: ~" ..coilTurns .." turns",200-(getWidth("Number of Turns: " ..coilTurns .." turns")/2),270)
+		love.graphics.print("You will need about " ..math.ceil(wireLength/12) .." feet of wire.",200-(getWidth("You will need about " ..math.ceil(wireLength/12) .." feet of wire.")/2),290)
 		if mode == "gauge" then
 			love.graphics.setColor(0,0,0)
 			love.graphics.rectangle("line",150,100,100,20)
